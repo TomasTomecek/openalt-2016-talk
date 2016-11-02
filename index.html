@@ -1,0 +1,401 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Development is easy these days</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/solarized.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Development is easy these days</h1>
+					<p>
+					<span>Tomáš Tomeček</span> <br> <span>Red Hat</span>
+					</p>
+				</section>
+
+				<section>
+					<h2>Intro</h2>
+					<ul>
+						<li class="fragment">Engineer @ Red Hat</li>
+						<li class="fragment">Codes a lot</li>
+						<li class="fragment">Doing a lot of containers lately</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>Why?</h2>
+					<ul>
+						<li class="fragment">Share the knowledge</li>
+						<li class="fragment">So you don't have to suffer the way I did</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>Full workflow</h2>
+					<ul>
+						<li class="fragment">Steps needed for using containers in production</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>Runtime environment</h2>
+					<ul>
+						<li class="fragment">Separate your project from others
+							<ul>
+								<li>Ecosystem based
+									<ul>
+										<li>virtualenv</li>
+										<li>RVM</li>
+									</ul>
+								</li>
+								<li>System based - containers</li>
+								<li>Virtualisation - vagrant</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>Automate!</h2>
+					<ul>
+						<li class="fragment">Don't be shy with makefiles
+							<ul>
+								<li>Or whatever your community is using</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>Shell</h2>
+					<ul>
+						<li class="fragment"></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Editor</h2>
+					<ul>
+						<li class="fragment"></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Code</h2>
+					<ul>
+						<li class="fragment">Style conventions</li>
+						<li class="fragment">Static analysis - linter</li>
+						<li class="fragment">go-fmt, autopep8</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Steps needed for using containers</h2>
+					<ol>
+						<li>Build</li>
+						<li>Distribute</li>
+						<li>Deploy</li>
+					</ol>
+					<aside class="notes">
+						<ul>
+							<li>app native form → container native form</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Build</h2>
+					<ul>
+						<li class="fragment">Containerize the application
+							<ul>
+								<li class="fragment">Produce Dockerfile</li>
+								<li class="fragment">Figure out container runtime options</li>
+								<li class="fragment">Usually easy</li>
+								<li class="fragment">Except when it's not</li>
+								<li class="fragment">Graphical applications, hardware devices, esoteric kernel features...</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>package</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Build (2)</h2>
+					<ul>
+						<li>Image content matters (Honza Horak says)</li>
+						<li class="fragment">Create an image
+							<ul>
+								<li class="fragment">Easy</li>
+								<li class="fragment">Although...</li>
+								<li class="fragment">Layer management (squashing)</li>
+								<li class="fragment">Build-time secrets</li>
+								<li class="fragment">And more... (see my DevConf talk)</li>
+							</ul>
+						</li>
+						<li class="fragment">Image hierarchy</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>docker-native squashing PR open</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Distribute</h2>
+					<ul>
+						<li class="fragment">As an archive</li>
+						<li class="fragment">Via shared storage (gh.com/containers/storage)</li>
+						<li class="fragment">Using Docker registry protocol</li>
+						<li class="fragment">Figure out naming scheme</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>sharing /v/l/docker/image is not supported</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Deploy</h2>
+					<ul>
+						<li class="fragment" data-fragment-index="1"><span class="fragment strike" data-fragment-index="2">The easiest one</span><span class="fragment" data-fragment-index="2"> Just kidding<span></li>
+						<li class="fragment">Version of docker engine matters</li>
+						<li class="fragment">Single node setup</li>
+						<li class="fragment">Multi node setup</li>
+						<li class="fragment">Orchestrator
+							<ul>
+								<li class="fragment">Managing the service</li>
+								<li class="fragment">Networking</li>
+								<li class="fragment">Storage</li>
+								<li class="fragment">(Rolling) updates</li>
+								<li class="fragment">Monitoring</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Quick recap</h2>
+					<ul>
+						<li class="fragment">Workflow</li>
+						<li class="fragment">Base Images</li>
+						<li class="fragment">CI / CD</li>
+						<li class="fragment">Orchestrator pick</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Expectations</h2>
+				</section>
+
+				<section>
+					<h2>Expectations — the good</h2>
+					<ul>
+						<li class="fragment">Unified environment</li>
+						<li class="fragment">Everything is automated</li>
+						<li class="fragment">Everything is tracked</li>
+						<li class="fragment">You are in control</li>
+					</ul>
+				</section>
+
+				<section>
+					<p><code>git tag && git push --tags</code></p>
+					<p class="fragment">Then sit back, relax and enjoy your beer.</i></p>
+				</section>
+
+				<section>
+					<h2>Expectations — the bad</h2>
+					<ul>
+						<li class="fragment">New type of infrastructure</li>
+						<li class="fragment">New experience, new skills</li>
+						<li class="fragment">Evolves quickly</li>
+						<li class="fragment">Some issues are hard to resolve</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>previously: bare metal and VMs, has own automation, can't be used for containers</li>
+							<li>consequence</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>State of the art</h2>
+				</section>
+
+				<section>
+					<h2>“Nobody cares about containers.”</h2>
+					<p>Solomon Hykes, CTO of Docker, Inc</p>
+					<p>Dockercon 2016, Keynote, day 1</p>
+				</section>
+
+				<section>
+					<h2>
+						<span class="fragment strike" data-fragment-index="1">Technology</span>
+						<span class="fragment" data-fragment-index="1">Platform</span>
+					</h2>
+					<aside class="notes">
+						<ul>
+							<li>Let's check the platform</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>docker 1.12</h2>
+					<ul>
+						<li class="fragment">Built-in orchestration</li>
+						<li class="fragment">Service API</li>
+						<li class="fragment">Distributed application bundle — multi-container applications</li>
+						<li class="fragment">New <code>HEALTHCHECK</code> instruction</li>
+						<li class="fragment"><code>--live-restore</code> daemon flag</li>
+						<li class="fragment"><code>docker</code> client binary and <code>dockerd</code> daemon</li>
+						<li class="fragment">Available in Fedora rawhide!!1!</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>swarm: optional, backwards compat, no overhead</li>
+							<li>swarm: Linux IPVS</li>
+							<li>dab: build on top of services</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Let's talk stability &amp; issues now</h2>
+					<ul>
+						<li>80/20</li>
+						<li>Lots of code changes</li>
+						<li>Releases every 2-3 months
+							<ul>
+								<li>with minor releases after a major one</li>
+							</ul>
+						</li>
+						<li>May be hard to reproduce</li>
+						<li>And even harder to fix</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Let's talk stability &amp; issues now (2)</h2>
+					<ul>
+						<li>Docker Daemon Hangs under load - <em>#13885</em></li>
+						<li>[1.11.0] Possible deadlock on container object <em>#22124</em></li>
+						<li>DNS queries sometimes get stuck since upgrading to 1.11.0 <em>#22185</em></li>
+						<li>Internet connectivity drops in random container. <em>#22144</em></li>
+						<li>Sometimes the device mapper is stuck in an infinite “mount/remount” loop <em>#20401</em></li>
+						<li>Docker build that fails with overlay storage backend only? <em>#12327</em></li>
+						<li>Overlayfs does not work with unix domain sockets <em>#12080</em></li>
+						<li>"device or resource busy"</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>lots of related issues that all API calls are locked</li>
+							<li>Open Since June 11th, 2015; 127 comments</li>
+							<li>dns - 81 comments</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Summary</h2>
+					<ul>
+						<li class="fragment">Docker engine has won containers</li>
+						<li class="fragment">Orchestration battle has begun</li>
+						<li class="fragment">Pick your platform</li>
+						<li class="fragment">Educate yourself</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Further reading</h2>
+					<ul>
+						<li><a href="https://github.com/docker/docker/issues/22539#issuecomment-217316284">/var/lib/docker on NFS</a></li>
+						<li><a href="https://youtu.be/vE1iDPx6-Ok">Dockercon 2016 Keynote Day 1</a></li>
+						<li><a href="https://blog.docker.com/2016/06/docker-app-bundle/">Distributed Application Bundles</a></li>
+						<li><a href="https://docs.docker.com/engine/swarm/swarm-tutorial/deploy-service/">Deploy a service</a></li>
+						<li><a href="https://blog.docker.com/2016/06/docker-1-12-built-in-orchestration/">Docker 1.12 blog post</a></li>
+						<li><a href="https://github.com/docker/docker/blob/master/experimental/docker-stacks-and-bundles.md">Docker stacks and bundles</a></li>
+						<li><a href="http://blog.hashbangbash.com/2014/11/docker-devicemapper-fix-for-device-or-resource-busy-ebusy/">docker: devicemapper fix for “device or resource busy” (EBUSY)</a></li>
+						<li><a href="https://github.com/docker/docker/pull/22641">Pull request: Adds ability to flatten image after build</a></li>
+						<li><a href="https://youtu.be/3Sgfy2VEayw">My talk: Is it hard to build a docker image?</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Questions are welcome!</h2>
+					<ul style="list-style-type: none;">
+						<li><span class="fa fa-github-square"></span> TomasTomecek/flock2016-talk</li>
+						<li><span class="fa fa-twitter-square"></span> @TomasTomec</li>
+					</ul>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				slideNumber: true,
+				transition: 'none',
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
